@@ -52,4 +52,12 @@ public class Cat
             return "Playing";
         }
     }
+    public double getFoodAmount() {
+        double foodAmount = weight - originWeight;
+        return foodAmount;
+    }
+    public void pee() {
+        weight = weight - 0.6;
+        System.out.println("Clean up after yourself");
+    }
 }

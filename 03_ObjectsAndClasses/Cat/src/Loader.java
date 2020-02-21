@@ -62,5 +62,20 @@ public class Loader
         System.out.println(cat[6].getWeight());
         System.out.print("Status Cat 7 is ");
         System.out.println(cat[6].getStatus());
+        System.out.println("----------------------------------");
+
+        //Тестирование методов getFoodAmount
+        System.out.println("Cat 1 weight is " + cat[0].getWeight());
+        cat[0].feed(150.0);
+        System.out.println("Food amount is " + cat[0].getFoodAmount());
+        System.out.println("Cat 1 weight is " + cat[0].getWeight());
+        System.out.println("----------------------------------");
+
+        //Тестирование метода pee
+        System.out.println("Cat 2 weight is " + cat[1].getWeight());
+        for (int i = 0; i < 5; i++) {
+            cat[1].pee();
+        }
+        System.out.println("Cat 2 weight is " + cat[1].getWeight());
     }
 }
