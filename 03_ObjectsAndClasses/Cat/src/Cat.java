@@ -6,15 +6,14 @@ public class Cat
     private double originWeight;
     private double weight;
 
-    private double minWeight;
-    private double maxWeight;
+    public static final int EYES_COUNT = 2;
+    private static final double minWeight = 1000.0;
+    private static final double maxWeight = 9000.0;
 
     public Cat()
     {
         weight = 1500.0 + 3000.0 * Math.random();
         originWeight = weight;
-        minWeight = 1000.0;
-        maxWeight = 9000.0;
         count++;
 
     }
