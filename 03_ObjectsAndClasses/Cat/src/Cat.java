@@ -18,6 +18,11 @@ public class Cat
 
     }
 
+    public Cat(double weight) {
+        this();
+        this.weight = weight;
+    }
+
     public void meow()
     {
         if (weight >= minWeight && weight <= maxWeight) {

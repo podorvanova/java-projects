@@ -81,5 +81,20 @@ public class Loader
 
         //Тестирование метода getCount
         System.out.println("Number of alive cats is " + Cat.getCount());
+        System.out.println("----------------------------------");
+
+        //Тестирование конструктора с весом кошки
+        Cat newCat = new Cat(3000.0);
+        System.out.println("New Cat weight is " + newCat.getWeight());
+        System.out.println("----------------------------------");
+
+        //Тестирование метода getKitten
+        System.out.println("Kitten weight is " + getKitten().getWeight());
+    }
+
+    //Метод генерации котенка
+    private static Cat getKitten() {
+        Cat kitten = new Cat(1100.0);
+        return kitten;
     }
 }
