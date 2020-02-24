@@ -10,6 +10,8 @@ public class Cat
     private static final double minWeight = 1000.0;
     private static final double maxWeight = 9000.0;
 
+    private CatColor catColor;
+
     public Cat()
     {
         weight = 1500.0 + 3000.0 * Math.random();
@@ -89,5 +91,11 @@ public class Cat
     }
     public static int getCount() {
         return count;
+    }
+    public void setColor(CatColor catColor) {
+        this.catColor = catColor;
+    }
+    public CatColor getColor() {
+        return catColor;
     }
 }
