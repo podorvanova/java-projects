@@ -77,5 +77,9 @@ public class Loader
             cat[1].pee();
         }
         System.out.println("Cat 2 weight is " + cat[1].getWeight());
+        System.out.println("----------------------------------");
+
+        //Тестирование метода getCount
+        System.out.println("Number of alive cats is " + Cat.getCount());
     }
 }
