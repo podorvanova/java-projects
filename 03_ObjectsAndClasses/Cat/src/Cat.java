@@ -20,6 +20,14 @@ public class Cat
 
     }
 
+    //Конструктор копирования
+    public Cat(Cat other) {
+        this.weight = other.weight;
+        this.originWeight = other.originWeight;
+        this.catColor = other.catColor;
+        count++;
+    }
+
     public Cat(double weight) {
         this();
         this.weight = weight;

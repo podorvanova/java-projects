@@ -90,6 +90,13 @@ public class Loader
 
         //Тестирование метода getKitten
         System.out.println("Kitten weight is " + getKitten().getWeight());
+        System.out.println("----------------------------------");
+
+        //Тестирование конструктора копирования
+        System.out.println("Number of alive cats is " + Cat.getCount());
+        Cat twinCat = new Cat(newCat);
+        System.out.println("Twin Cat weight is " + twinCat.getWeight());
+        System.out.println("Number of alive cats is " + Cat.getCount());
     }
 
     //Метод генерации котенка
