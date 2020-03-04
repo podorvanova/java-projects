@@ -7,8 +7,8 @@ public class Cat
     private double weight;
 
     public static final int EYES_COUNT = 2;
-    private static final double minWeight = 1000.0;
-    private static final double maxWeight = 9000.0;
+    private static final double MIN_WEIGHT = 1000.0;
+    private static final double MAX_WEIGHT = 9000.0;
     private double foodAmount = 0.0;
 
     private CatColor catColor;
@@ -36,10 +36,10 @@ public class Cat
 
     public void meow()
     {
-        if (weight >= minWeight && weight <= maxWeight) {
+        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
             weight = weight - 1;
             System.out.println("Meow");
-            if (weight < minWeight) {
+            if (weight < MIN_WEIGHT) {
                 count--;
             }
         }
@@ -47,21 +47,21 @@ public class Cat
 
     public void feed(Double amount)
     {
-        if (weight >= minWeight && weight <= maxWeight) {
+        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
             weight = weight + amount;
             foodAmount += amount;
         }
-        if (weight > maxWeight) {
+        if (weight > MAX_WEIGHT) {
             count--;
         }
     }
 
     public void drink(Double amount)
     {
-        if (weight >= minWeight && weight <= maxWeight) {
+        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
             weight = weight + amount;
         }
-        if (weight > maxWeight) {
+        if (weight > MAX_WEIGHT) {
             count--;
         }
     }
@@ -73,10 +73,10 @@ public class Cat
 
     public String getStatus()
     {
-        if(weight < minWeight) {
+        if(weight < MIN_WEIGHT) {
             return "Dead";
         }
-        else if(weight > maxWeight) {
+        else if(weight > MAX_WEIGHT) {
             return "Exploded";
         }
         else if(weight > originWeight) {
@@ -90,11 +90,11 @@ public class Cat
         return foodAmount;
     }
     public void pee() {
-        if (weight >= minWeight && weight <= maxWeight) {
+        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
             weight = weight - 0.6;
             System.out.println("Clean up after yourself");
         }
-        if (weight < minWeight) {
+        if (weight < MIN_WEIGHT) {
             count--;
         }
     }
