@@ -9,6 +9,7 @@ public class Cat
     public static final int EYES_COUNT = 2;
     private static final double minWeight = 1000.0;
     private static final double maxWeight = 9000.0;
+    private double foodAmount = 0.0;
 
     private CatColor catColor;
 
@@ -48,6 +49,7 @@ public class Cat
     {
         if (weight >= minWeight && weight <= maxWeight) {
             weight = weight + amount;
+            foodAmount += amount;
         }
         if (weight > maxWeight) {
             count--;
@@ -85,7 +87,6 @@ public class Cat
         }
     }
     public double getFoodAmount() {
-        double foodAmount = weight - originWeight;
         return foodAmount;
     }
     public void pee() {
