@@ -101,7 +101,6 @@ public class Loader
 
     //Метод генерации котенка
     private static Cat getKitten() {
-        Cat kitten = new Cat(1100.0);
-        return kitten;
+        return new Cat(1100.0);
     }
 }
