@@ -39,9 +39,9 @@ public class Cat
         if (weight >= minWeight && weight <= maxWeight) {
             weight = weight - 1;
             System.out.println("Meow");
-        }
             if (weight < minWeight) {
-            count--;
+                count--;
+            }
         }
     }
 
