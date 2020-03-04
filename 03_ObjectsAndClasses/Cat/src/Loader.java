@@ -52,7 +52,7 @@ public class Loader
         //Кошка, замяуканная до смерти
         System.out.print("Cat 7 weight is ");
         System.out.println(cat[6].getWeight());
-        for (int i = 1; ; i++) {
+        while (true) {
             cat[6].meow();
             if (cat[6].getStatus().equals("Dead")) {
                 break;
