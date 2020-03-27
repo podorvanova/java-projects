@@ -26,7 +26,9 @@ public class Cat
         this.weight = other.weight;
         this.originWeight = other.originWeight;
         this.catColor = other.catColor;
-        count++;
+        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
+            count++;
+        }
     }
 
     public Cat(double weight) {
