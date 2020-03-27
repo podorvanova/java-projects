@@ -37,6 +37,20 @@ public class Cat
         this.originWeight = weight;
     }
 
+    public Cat(double weight, double originWeight, CatColor catColor) {
+        this.weight = weight;
+        this.originWeight = weight;
+        this.catColor = catColor;
+        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
+            count++;
+        }
+    }
+
+    //Метод копирования
+    public Cat copy() {
+        return new Cat(this.getWeight(), this.originWeight, this.getColor());
+    }
+
     public void meow()
     {
         if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {

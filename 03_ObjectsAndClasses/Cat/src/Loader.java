@@ -97,6 +97,14 @@ public class Loader
         Cat twinCat = new Cat(newCat);
         System.out.println("Twin Cat weight is " + twinCat.getWeight());
         System.out.println("Number of alive cats is " + Cat.getCount());
+        System.out.println("----------------------------------");
+
+        //Тестирование метода копирования
+        Cat original = new Cat();
+        System.out.println("Original Cat weight is " + original.getWeight());
+        Cat copy = original.copy();
+        System.out.println("Copy Cat weight is " + copy.getWeight());
+        System.out.println("Number of alive cats is " + Cat.getCount());
     }
 
     //Метод генерации котенка
