@@ -26,7 +26,7 @@ public class Cat
         this.weight = other.weight;
         this.originWeight = other.originWeight;
         this.catColor = other.catColor;
-        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
+        if (isAlive()) {
             count++;
         }
     }
@@ -41,7 +41,7 @@ public class Cat
         this.weight = weight;
         this.originWeight = weight;
         this.catColor = catColor;
-        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
+        if (isAlive()) {
             count++;
         }
     }
@@ -51,9 +51,13 @@ public class Cat
         return new Cat(this.getWeight(), this.originWeight, this.getColor());
     }
 
+    private boolean isAlive() {
+        return weight >= MIN_WEIGHT && weight <= MAX_WEIGHT;
+    }
+
     public void meow()
     {
-        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
+        if (isAlive()) {
             weight = weight - 1;
             System.out.println("Meow");
             if (weight < MIN_WEIGHT) {
@@ -64,7 +68,7 @@ public class Cat
 
     public void feed(Double amount)
     {
-        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
+        if (isAlive()) {
             weight = weight + amount;
             foodAmount += amount;
         }
@@ -75,7 +79,7 @@ public class Cat
 
     public void drink(Double amount)
     {
-        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
+        if (isAlive()) {
             weight = weight + amount;
         }
         if (weight > MAX_WEIGHT) {
@@ -107,7 +111,7 @@ public class Cat
         return foodAmount;
     }
     public void pee() {
-        if (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT) {
+        if (isAlive()) {
             weight = weight - 0.6;
             System.out.println("Clean up after yourself");
         }
