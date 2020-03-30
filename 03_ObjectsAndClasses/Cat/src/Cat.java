@@ -71,9 +71,9 @@ public class Cat
         if (isAlive()) {
             weight = weight + amount;
             foodAmount += amount;
-        }
-        if (weight > MAX_WEIGHT) {
-            count--;
+            if (weight > MAX_WEIGHT) {
+                count--;
+            }
         }
     }
 
