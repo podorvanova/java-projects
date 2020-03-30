@@ -114,9 +114,9 @@ public class Cat
         if (isAlive()) {
             weight = weight - 0.6;
             System.out.println("Clean up after yourself");
-        }
-        if (weight < MIN_WEIGHT) {
-            count--;
+            if (weight < MIN_WEIGHT) {
+                count--;
+            }
         }
     }
     public static int getCount() {
