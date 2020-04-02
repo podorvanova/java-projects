@@ -7,6 +7,7 @@ public class Main
 
         Main newClass = new Main();
         System.out.println(newClass.sumDigits(1010104));
+        System.out.println(newClass.sumDigitsStar(102012));
 
     }
 
@@ -16,6 +17,16 @@ public class Main
         for (int i = 0; i < numberString.length(); i++) {
             char symbol = numberString.charAt(i);
             sumDigits += Integer.parseInt(String.valueOf(symbol));
+        }
+        return sumDigits;
+    }
+
+    public Integer sumDigitsStar(Integer number) {
+        String numberString = number.toString();
+        int sumDigits = 0;
+        for (int i = 0; i < numberString.length(); i++) {
+            char symbol = numberString.charAt(i);
+            sumDigits += Character.getNumericValue(symbol);
         }
         return sumDigits;
     }
