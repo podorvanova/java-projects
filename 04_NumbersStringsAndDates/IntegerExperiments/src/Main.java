@@ -5,9 +5,8 @@ public class Main
         Container container = new Container();
         container.count += 7843;
 
-        Main newClass = new Main();
         System.out.println(sumDigits(1010104));
-        System.out.println(newClass.sumDigitsStar(102012));
+        System.out.println(sumDigitsStar(102012));
 
     }
 
@@ -21,7 +20,7 @@ public class Main
         return sumDigits;
     }
 
-    public Integer sumDigitsStar(Integer number) {
+    public static Integer sumDigitsStar(Integer number) {
         String numberString = number.toString();
         int sumDigits = 0;
         for (int i = 0; i < numberString.length(); i++) {
