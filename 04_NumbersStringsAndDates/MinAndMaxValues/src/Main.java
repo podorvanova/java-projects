@@ -20,12 +20,12 @@ public class Main {
         System.out.println("Минимальное значение типа long " + minLong);
         System.out.println("Максимальное значение типа long " + maxLong);
 
-        double minDouble = Double.MIN_VALUE;
+        double minDouble = -Double.MAX_VALUE;
         double maxDouble = Double.MAX_VALUE;
         System.out.println("Минимальное значение типа double " + minDouble);
         System.out.println("Максимальное значение типа double " + maxDouble);
 
-        float minFloat = Float.MIN_VALUE;
+        float minFloat = -Float.MAX_VALUE;
         float maxFloat = Float.MAX_VALUE;
         System.out.println("Минимальное значение типа float " + minFloat);
         System.out.println("Максимальное значение типа float " + maxFloat);
