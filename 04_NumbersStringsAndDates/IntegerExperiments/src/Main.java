@@ -6,12 +6,12 @@ public class Main
         container.count += 7843;
 
         Main newClass = new Main();
-        System.out.println(newClass.sumDigits(1010104));
+        System.out.println(sumDigits(1010104));
         System.out.println(newClass.sumDigitsStar(102012));
 
     }
 
-    public Integer sumDigits(Integer number) {
+    public static Integer sumDigits(Integer number) {
         String numberString = number.toString();
         int sumDigits = 0;
         for (int i = 0; i < numberString.length(); i++) {
