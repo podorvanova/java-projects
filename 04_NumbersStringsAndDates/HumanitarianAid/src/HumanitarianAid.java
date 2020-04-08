@@ -1,3 +1,5 @@
+import static java.lang.Math.*;
+
 public class HumanitarianAid {
     //Количество коробок в одном грузовике
     private static final int BOXES_IN_ONE_TRUCK = 27 * 12;
@@ -20,7 +22,7 @@ public class HumanitarianAid {
         //Номер текущего контейнера
         int containerIndex = 1;
 
-        int truckAmount = divideAndRoundUp(xBox, BOXES_IN_ONE_TRUCK);
+        int truckAmount = (int) Math.ceil((double) xBox / BOXES_IN_ONE_TRUCK);
         System.out.println("Необходимое количество грузовиков " + truckAmount);
 
         int containerAmount = divideAndRoundUp(xBox, BOXES_IN_ONE_CONTAINER);
