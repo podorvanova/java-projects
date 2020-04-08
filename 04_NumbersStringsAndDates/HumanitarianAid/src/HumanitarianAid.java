@@ -25,7 +25,7 @@ public class HumanitarianAid {
         int truckAmount = (int) Math.ceil((double) xBox / BOXES_IN_ONE_TRUCK);
         System.out.println("Необходимое количество грузовиков " + truckAmount);
 
-        int containerAmount = divideAndRoundUp(xBox, BOXES_IN_ONE_CONTAINER);
+        int containerAmount = (int) Math.ceil((double) xBox / BOXES_IN_ONE_CONTAINER);
         System.out.println("Необходимое количество контейнеров " + containerAmount);
 
         for (int truck = 1; truck <= truckAmount; truck++) {
