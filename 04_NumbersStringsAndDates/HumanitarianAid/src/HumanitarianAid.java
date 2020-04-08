@@ -1,4 +1,7 @@
 public class HumanitarianAid {
+    //Количество коробок в одном грузовике
+    private static final int BOXES_IN_ONE_TRUCK = 27 * 12;
+
     public static int divideAndRoundUp(int dividend, int divider) {
         if (dividend % divider != 0) {
             return dividend / divider + 1;
@@ -15,7 +18,7 @@ public class HumanitarianAid {
         //Номер текущего контейнера
         int containerIndex = 1;
 
-        int truckAmount = divideAndRoundUp(xBox, 27 * 12);
+        int truckAmount = divideAndRoundUp(xBox, BOXES_IN_ONE_TRUCK);
         System.out.println("Необходимое количество грузовиков " + truckAmount);
 
         int containerAmount = divideAndRoundUp(xBox, 27);
