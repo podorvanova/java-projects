@@ -3,6 +3,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Name {
+    public static int spaceCount(String text) {
+        int count = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == ' ') {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static void main(String[] args) throws IOException {
         while(true) {
             System.out.print("Введите ФИО: ");
@@ -11,6 +21,12 @@ public class Name {
 
             if (text.length() > 64) {
                 System.out.println("ФИО не может превышать 64 символа");
+                continue;
+            }
+
+            int spaceCount = spaceCount(text);
+            if (spaceCount != 2) {
+                System.out.println("В ФИО должно быть 2 пробела");
                 continue;
             }
 
