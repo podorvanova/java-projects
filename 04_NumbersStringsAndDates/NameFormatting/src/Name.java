@@ -13,6 +13,19 @@ public class Name {
         return count;
     }
 
+    /* Метод проверяет, что строка состоит из символов русского алфавита.
+       Кода символов от 'А' до 'я' последовательны в таблице символов Юникод.
+       Кода символов 'Ё' и 'ё' лежат вне промежутка от 'А' до 'я'.
+     */
+    public static boolean isTextRussian(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            if ((text.charAt(i) < 'А' || text.charAt(i) > 'я') && text.charAt(i) != 'Ё' && text.charAt(i) != 'ё') {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) throws IOException {
         while(true) {
             System.out.print("Введите ФИО: ");
@@ -38,6 +51,11 @@ public class Name {
                     Character.isLowerCase(givenName.charAt(0)) ||
                     Character.isLowerCase(middleName.charAt(0))) {
                 System.out.println("Фамилия, имя и отчество должны начинаться с заглавной буквы");
+                continue;
+            }
+
+            if (!isTextRussian(familyName) || !isTextRussian(givenName) || !isTextRussian(middleName)) {
+                System.out.println("ФИО должно содержать только символы русского алфавита");
                 continue;
             }
 
