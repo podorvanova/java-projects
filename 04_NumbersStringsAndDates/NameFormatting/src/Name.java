@@ -34,6 +34,13 @@ public class Name {
             String givenName = text.substring(text.indexOf(' ') + 1, text.lastIndexOf(' '));
             String middleName = text.substring(text.lastIndexOf(' ') + 1);
 
+            if (Character.isLowerCase(familyName.charAt(0)) ||
+                    Character.isLowerCase(givenName.charAt(0)) ||
+                    Character.isLowerCase(middleName.charAt(0))) {
+                System.out.println("Фамилия, имя и отчество должны начинаться с заглавной буквы");
+                continue;
+            }
+
             System.out.println("Фамилия: " + familyName);
             System.out.println("Имя: " + givenName);
             System.out.println("Отчество: " + middleName);
