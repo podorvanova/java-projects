@@ -43,9 +43,10 @@ public class Name {
                 continue;
             }
 
-            String familyName = text.substring(0, text.indexOf(' '));
-            String givenName = text.substring(text.indexOf(' ') + 1, text.lastIndexOf(' '));
-            String middleName = text.substring(text.lastIndexOf(' ') + 1);
+            String[] words = text.split("\\s+");
+            String familyName = words[0];
+            String givenName = words[1];
+            String middleName = words[2];
 
             if (Character.isLowerCase(familyName.charAt(0)) ||
                     Character.isLowerCase(givenName.charAt(0)) ||
