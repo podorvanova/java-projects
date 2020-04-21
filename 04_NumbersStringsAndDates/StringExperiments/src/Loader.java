@@ -1,3 +1,5 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Loader
 {
@@ -5,16 +7,15 @@ public class Loader
     {
         String text = "Вася заработал 5000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей";
 
-        //Зарплата Васи
-        int vasyaIncomeBeginIndex = text.indexOf('5');
-        String vasyaIncome = text.substring(vasyaIncomeBeginIndex, 19);
+        Pattern pattern = Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(text);
 
-        //Зарплата Маши
-        int mashaIncomeEndIndex = text.lastIndexOf('0');
-        String mashaPreIncome = text.substring(55, mashaIncomeEndIndex + 1);
-        String mashaIncome = mashaPreIncome.trim();
+        int sumIncome = 0;
+        while (matcher.find()) {
+            String income = matcher.group();
+            sumIncome += Integer.parseInt(income);
+        }
 
-        int sumIncome = Integer.parseInt(vasyaIncome) + Integer.parseInt(mashaIncome);
-        System.out.println("Суммарный доход Васи и Маши: " + sumIncome + " рублей");
+        System.out.println("Суммарный доход Васи, Пети и Маши: " + sumIncome + " рублей");
     }
 }
