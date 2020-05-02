@@ -20,6 +20,8 @@ public class Main {
             } else if (command.equals("END")) {
                 scanner.close();
                 break;
+            } else {
+                System.out.println("Команда не найдена. Введите команду еще раз.");
             }
         }
     }
