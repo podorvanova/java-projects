@@ -11,6 +11,8 @@ public class Main {
 
             if (command.equals("LIST")) {
                 getList(toDoList);
+            } else if (command.equals("ADD")) {
+                addToList(toDoList, scanner);
             }
         }
     }
@@ -24,5 +26,18 @@ public class Main {
                 System.out.println((i + 1) + ". " + toDoList.get(i));
             }
         }
+    }
+
+    public static void addToList (ArrayList<String> toDoList, Scanner scanner) {
+        String toDo;
+        if (scanner.hasNextInt()) {
+            int index = scanner.nextInt();
+            toDo = scanner.nextLine().trim();
+            toDoList.add(index - 1, toDo);
+        } else {
+            toDo = scanner.nextLine().trim();
+            toDoList.add(toDo);
+        }
+        System.out.println("Дело \"" + toDo + "\" добавлено в Список дел.");
     }
 }
