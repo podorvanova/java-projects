@@ -15,6 +15,8 @@ public class Main {
                 addToList(toDoList, scanner);
             } else if (command.equals("EDIT")) {
                 editItem(toDoList, scanner);
+            } else if (command.equals("DELETE")) {
+                deleteItem(toDoList, scanner);
             }
         }
     }
@@ -49,5 +51,12 @@ public class Main {
         String previousToDo = toDoList.get(index - 1);
         toDoList.set(index - 1, toDo);
         System.out.println("Дело \"" + previousToDo + "\" было заменено на дело \"" + toDo + "\".");
+    }
+
+    public static void deleteItem (ArrayList<String> toDoList, Scanner scanner) {
+        int index = scanner.nextInt();
+        String deletedItem = toDoList.get(index - 1);
+        toDoList.remove(index - 1);
+        System.out.println("Дело \"" + deletedItem + "\" было удалено из Списка дел.");
     }
 }
