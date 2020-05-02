@@ -17,6 +17,9 @@ public class Main {
                 editItem(toDoList, scanner);
             } else if (command.equals("DELETE")) {
                 deleteItem(toDoList, scanner);
+            } else if (command.equals("END")) {
+                scanner.close();
+                break;
             }
         }
     }
