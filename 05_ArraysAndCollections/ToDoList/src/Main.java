@@ -13,6 +13,8 @@ public class Main {
                 getList(toDoList);
             } else if (command.equals("ADD")) {
                 addToList(toDoList, scanner);
+            } else if (command.equals("EDIT")) {
+                editItem(toDoList, scanner);
             }
         }
     }
@@ -39,5 +41,13 @@ public class Main {
             toDoList.add(toDo);
         }
         System.out.println("Дело \"" + toDo + "\" добавлено в Список дел.");
+    }
+
+    public static void editItem (ArrayList<String> toDoList, Scanner scanner) {
+        int index = scanner.nextInt();
+        String toDo = scanner.nextLine().trim();
+        String previousToDo = toDoList.get(index - 1);
+        toDoList.set(index - 1, toDo);
+        System.out.println("Дело \"" + previousToDo + "\" было заменено на дело \"" + toDo + "\".");
     }
 }
