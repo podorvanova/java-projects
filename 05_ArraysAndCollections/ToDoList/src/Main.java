@@ -1,22 +1,23 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    private static List<String> toDoList = new ArrayList<String>();
+
     public static void main(String[] args) {
         System.out.println("Добро пожаловать в ToDoList! Для просмотра списка дел введите LIST. Для выхода введите END.");
-        ArrayList<String> toDoList = new ArrayList<>();
         while (true) {
             Scanner scanner = new Scanner(System.in);
             String command = scanner.next();
-
             if (command.equals("LIST")) {
-                getList(toDoList);
+                getList();
             } else if (command.equals("ADD")) {
-                addToList(toDoList, scanner);
+                addToList(scanner);
             } else if (command.equals("EDIT")) {
-                editItem(toDoList, scanner);
+                editItem(scanner);
             } else if (command.equals("DELETE")) {
-                deleteItem(toDoList, scanner);
+                deleteItem(scanner);
             } else if (command.equals("END")) {
                 scanner.close();
                 break;
@@ -26,7 +27,7 @@ public class Main {
         }
     }
 
-    public static void getList (ArrayList<String> toDoList) {
+    public static void getList () {
         if (toDoList.isEmpty()) {
             System.out.println("Список дел пуст. Введите ADD для добавления дела.");
         } else {
@@ -37,7 +38,7 @@ public class Main {
         }
     }
 
-    public static void addToList (ArrayList<String> toDoList, Scanner scanner) {
+    public static void addToList (Scanner scanner) {
         String toDo;
         if (scanner.hasNextInt()) {
             int index = scanner.nextInt();
@@ -50,7 +51,7 @@ public class Main {
         System.out.println("Дело \"" + toDo + "\" добавлено в Список дел.");
     }
 
-    public static void editItem (ArrayList<String> toDoList, Scanner scanner) {
+    public static void editItem (Scanner scanner) {
         int index = scanner.nextInt();
         String toDo = scanner.nextLine().trim();
         String previousToDo = toDoList.get(index - 1);
@@ -58,7 +59,7 @@ public class Main {
         System.out.println("Дело \"" + previousToDo + "\" было заменено на дело \"" + toDo + "\".");
     }
 
-    public static void deleteItem (ArrayList<String> toDoList, Scanner scanner) {
+    public static void deleteItem (Scanner scanner) {
         int index = scanner.nextInt();
         String deletedItem = toDoList.get(index - 1);
         toDoList.remove(index - 1);
