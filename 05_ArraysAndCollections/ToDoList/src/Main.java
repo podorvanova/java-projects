@@ -1,24 +1,42 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
-    private static List<String> toDoList = new ArrayList<String>();
+    private static final List<String> toDoList = new ArrayList<String>();
 
     public static void main(String[] args) {
         System.out.println("Добро пожаловать в ToDoList! Для просмотра списка дел введите LIST. Для выхода введите END.");
         while (true) {
             Scanner scanner = new Scanner(System.in);
-            String command = scanner.next();
-            if (command.equals("LIST")) {
+            String input = scanner.nextLine();
+
+            final Matcher listMatcher = Pattern.compile("^LIST$").matcher(input);
+            final Matcher addMatcher = Pattern.compile("^ADD ([0-9]+ )?([А-Яа-я\\s]*)$").matcher(input);
+            final Matcher editMatcher = Pattern.compile("^EDIT ([0-9]+) ([А-Яа-я\\s]*)$").matcher(input);
+            final Matcher deleteMatcher = Pattern.compile("^DELETE ([0-9]+)$").matcher(input);
+            final Matcher endMatcher = Pattern.compile("^END$").matcher(input);
+
+            if (listMatcher.find()) {
                 getList();
-            } else if (command.equals("ADD")) {
-                addToList(scanner);
-            } else if (command.equals("EDIT")) {
-                editItem(scanner);
-            } else if (command.equals("DELETE")) {
-                deleteItem(scanner);
-            } else if (command.equals("END")) {
+            } else if (addMatcher.find()) {
+                String toDoElement = addMatcher.group(2);
+                if (addMatcher.group(1) != null) {
+                    int index = Integer.parseInt(addMatcher.group(1).trim());
+                    addToList(index, toDoElement);
+                } else {
+                    addToList(toDoList.size() + 1, toDoElement);
+                }
+            } else if (editMatcher.find()) {
+                int index = Integer.parseInt(editMatcher.group(1));
+                String toDoElement = editMatcher.group(2);
+                editItem(index, toDoElement);
+            } else if (deleteMatcher.find()) {
+                int index = Integer.parseInt(deleteMatcher.group(1));
+                deleteItem(index);
+            } else if (endMatcher.find()) {
                 scanner.close();
                 break;
             } else {
@@ -38,29 +56,18 @@ public class Main {
         }
     }
 
-    public static void addToList (Scanner scanner) {
-        String toDo;
-        if (scanner.hasNextInt()) {
-            int index = scanner.nextInt();
-            toDo = scanner.nextLine().trim();
-            toDoList.add(index - 1, toDo);
-        } else {
-            toDo = scanner.nextLine().trim();
-            toDoList.add(toDo);
-        }
-        System.out.println("Дело \"" + toDo + "\" добавлено в Список дел.");
+    public static void addToList (int index, String toDoElement) {
+        toDoList.add(index - 1, toDoElement);
+        System.out.println("Дело \"" + toDoElement + "\" добавлено в Список дел.");
     }
 
-    public static void editItem (Scanner scanner) {
-        int index = scanner.nextInt();
-        String toDo = scanner.nextLine().trim();
-        String previousToDo = toDoList.get(index - 1);
-        toDoList.set(index - 1, toDo);
-        System.out.println("Дело \"" + previousToDo + "\" было заменено на дело \"" + toDo + "\".");
+    public static void editItem (int index, String toDoElement) {
+        String previousElement = toDoList.get(index - 1);
+        toDoList.set(index - 1, toDoElement);
+        System.out.println("Дело \"" + previousElement + "\" было заменено на дело \"" + toDoElement + "\".");
     }
 
-    public static void deleteItem (Scanner scanner) {
-        int index = scanner.nextInt();
+    public static void deleteItem (int index) {
         String deletedItem = toDoList.get(index - 1);
         toDoList.remove(index - 1);
         System.out.println("Дело \"" + deletedItem + "\" было удалено из Списка дел.");
