@@ -57,19 +57,43 @@ public class Main {
     }
 
     public static void addToList (int index, String toDoElement) {
-        toDoList.add(index - 1, toDoElement);
-        System.out.println("Дело \"" + toDoElement + "\" добавлено в Список дел.");
+        if (checkListBoundaries(index)) {
+            toDoList.add(index - 1, toDoElement);
+            System.out.println("Дело \"" + toDoElement + "\" добавлено в Список дел.");
+        }
     }
 
     public static void editItem (int index, String toDoElement) {
-        String previousElement = toDoList.get(index - 1);
-        toDoList.set(index - 1, toDoElement);
-        System.out.println("Дело \"" + previousElement + "\" было заменено на дело \"" + toDoElement + "\".");
+        if (checkElementInList(index)) {
+            String previousElement = toDoList.get(index - 1);
+            toDoList.set(index - 1, toDoElement);
+            System.out.println("Дело \"" + previousElement + "\" было заменено на дело \"" + toDoElement + "\".");
+        }
     }
 
     public static void deleteItem (int index) {
-        String deletedItem = toDoList.get(index - 1);
-        toDoList.remove(index - 1);
-        System.out.println("Дело \"" + deletedItem + "\" было удалено из Списка дел.");
+        if (checkElementInList(index)) {
+            String deletedItem = toDoList.get(index - 1);
+            toDoList.remove(index - 1);
+            System.out.println("Дело \"" + deletedItem + "\" было удалено из Списка дел.");
+        }
+    }
+
+    public static boolean checkListBoundaries (int index) {
+        if (index >= 1 && index <= toDoList.size() + 1) {
+            return true;
+        } else {
+            System.out.println("Введенный номер дела нельзя добавить в список. Введите команду еще раз.");
+            return false;
+        }
+    }
+
+    public static boolean checkElementInList (int index) {
+        if (index >= 1 && index <= toDoList.size()) {
+            return true;
+        } else {
+            System.out.println("Введенный номер дела в списке не существует. Введите команду еще раз.");
+            return false;
+        }
     }
 }
