@@ -13,9 +13,18 @@ public class Main {
             String input = scanner.nextLine();
 
             final Matcher listMatcher = Pattern.compile("^LIST$").matcher(input);
+            final Matcher addMatcher = Pattern.compile("^ADD (.*)$").matcher(input);
 
             if (listMatcher.find()) {
                 getEmailList();
+            } else if (addMatcher.find()) {
+                String email = addMatcher.group(1);
+                final Matcher emailValidated = Pattern.compile("^[a-zA-Z0-9.-]+@[a-zA-Z0-9-]+\\.[a-z]+$").matcher(email);
+                if (emailValidated.find()) {
+                    addEmail(email);
+                } else {
+                    System.out.println("Некорректный email. Адрес электронный почты должен иметь вид username@hostname.");
+                }
             }
         }
     }
@@ -29,5 +38,10 @@ public class Main {
                 System.out.println(email);
             }
         }
+    }
+
+    public static void addEmail (String email) {
+        emailsList.add(email);
+        System.out.println(email + " добавлен в список.");
     }
 }
