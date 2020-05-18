@@ -14,6 +14,7 @@ public class Main {
 
             final Matcher listMatcher = Pattern.compile("^LIST$").matcher(input);
             final Matcher addMatcher = Pattern.compile("^ADD (.*)$").matcher(input);
+            final Matcher endMatcher = Pattern.compile("^END$").matcher(input);
 
             if (listMatcher.find()) {
                 getEmailList();
@@ -25,6 +26,11 @@ public class Main {
                 } else {
                     System.out.println("Некорректный email. Адрес электронный почты должен иметь вид username@hostname.");
                 }
+            } else if (endMatcher.find()) {
+                scanner.close();
+                break;
+            } else {
+                System.out.println("Команда не найдена. Введите команду еще раз.");
             }
         }
     }
