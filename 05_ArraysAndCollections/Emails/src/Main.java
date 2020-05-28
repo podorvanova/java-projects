@@ -12,11 +12,9 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
 
-            final Matcher listMatcher = Pattern.compile("^LIST$").matcher(input);
             final Matcher addMatcher = Pattern.compile("^ADD (.*)$").matcher(input);
-            final Matcher endMatcher = Pattern.compile("^END$").matcher(input);
 
-            if (listMatcher.find()) {
+            if (input.equals("LIST")) {
                 getEmailList();
             } else if (addMatcher.find()) {
                 String email = addMatcher.group(1);
@@ -26,7 +24,7 @@ public class Main {
                 } else {
                     System.out.println("Некорректный email. Адрес электронный почты должен иметь вид username@hostname.");
                 }
-            } else if (endMatcher.find()) {
+            } else if (input.equals("END")) {
                 scanner.close();
                 break;
             } else {
