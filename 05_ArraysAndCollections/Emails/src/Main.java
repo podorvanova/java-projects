@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class Main {
     private static final HashSet<String> emailsList = new HashSet<>();
+    private static final Pattern addCommandPattern = Pattern.compile("^ADD (.*)$");
+    private static final Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9.-]+@[a-zA-Z0-9-]+\\.[a-z]+$");
 
     public static void main(String[] args) {
         System.out.println("Добро пожаловать в список email-ов. Для просмотра списка введите LIST. Для выхода введите END.");
@@ -12,14 +14,14 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
 
-            final Matcher addMatcher = Pattern.compile("^ADD (.*)$").matcher(input);
+            final Matcher addCommandMatcher = addCommandPattern.matcher(input);
 
             if (input.equals("LIST")) {
                 getEmailList();
-            } else if (addMatcher.find()) {
-                String email = addMatcher.group(1);
-                final Matcher emailValidated = Pattern.compile("^[a-zA-Z0-9.-]+@[a-zA-Z0-9-]+\\.[a-z]+$").matcher(email);
-                if (emailValidated.find()) {
+            } else if (addCommandMatcher.find()) {
+                String email = addCommandMatcher.group(1);
+                final Matcher emailMatcher = emailPattern.matcher(email);
+                if (emailMatcher.find()) {
                     addEmail(email);
                 } else {
                     System.out.println("Некорректный email. Адрес электронный почты должен иметь вид username@hostname.");
