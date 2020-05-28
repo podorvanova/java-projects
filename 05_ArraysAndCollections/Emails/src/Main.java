@@ -47,7 +47,11 @@ public class Main {
     }
 
     public static void addEmail (String email) {
-        emailsList.add(email);
-        System.out.println(email + " добавлен в список.");
+        if (emailsList.contains(email)) {
+            System.out.println("Введенный email уже содержится в списке.");
+        } else {
+            emailsList.add(email);
+            System.out.println(email + " добавлен в список.");
+        }
     }
 }
