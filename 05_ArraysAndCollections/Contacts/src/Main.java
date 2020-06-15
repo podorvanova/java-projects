@@ -33,9 +33,7 @@ public class Main {
                         if (matcherTelephone.find()) {
                             String telephone = cleanTelephone(secondInput);
                             numberToName.put(telephone, name);
-                            if (nameToNumbers.get(name) == null) {
-                                nameToNumbers.put(name, new ArrayList<>());
-                            }
+                            nameToNumbers.computeIfAbsent(name, k -> new ArrayList<>());
                             nameToNumbers.get(name).add(telephone);
                             System.out.println("Контакт добавлен в телефонную книгу.");
                             break;
@@ -47,9 +45,9 @@ public class Main {
             } else if (matcherTelephone.find()) {
                 String telephone = cleanTelephone(input);
                 if (numberToName.containsKey(telephone)) {
+                    String contactName = numberToName.get(telephone);
                     System.out.println("Контакт уже содержится в телефонной книге.");
-                    System.out.println(numberToName.get(telephone) + ' ' + nameToNumbers.get(numberToName.get(telephone)));
-                    nameToNumbers.get(numberToName.get(telephone));
+                    System.out.println(contactName + ' ' + nameToNumbers.get(contactName));
                 } else {
                     System.out.println("Введите имя, чтобы добавить контакт.");
                     while (true) {
@@ -58,9 +56,7 @@ public class Main {
                         if (matcherName.find()) {
                             String name = secondInput;
                             numberToName.put(telephone, name);
-                            if (nameToNumbers.get(name) == null) {
-                                nameToNumbers.put(name, new ArrayList<>());
-                            }
+                            nameToNumbers.computeIfAbsent(name, k -> new ArrayList<>());
                             nameToNumbers.get(name).add(telephone);
                             System.out.println("Контакт добавлен в телефонную книгу.");
                             break;
@@ -83,8 +79,8 @@ public class Main {
             System.out.println("Список контактов пуст. Введите номер телефона или имя для добавления.");
         } else {
             System.out.println("Список контактов:");
-            for (String key : nameToNumbers.keySet()) {
-                System.out.println(key + ' ' + nameToNumbers.get(key));
+            for (Map.Entry<String, List<String>> entry : nameToNumbers.entrySet()) {
+                System.out.println(entry.getKey() + " " + entry.getValue());
             }
         }
     }
