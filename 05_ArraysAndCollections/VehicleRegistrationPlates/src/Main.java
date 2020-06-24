@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class Main {
     public static final char[] letters = {'А', 'В', 'Е', 'К', 'М', 'Н', 'О', 'Р', 'С', 'Т', 'У', 'Х'};
@@ -10,9 +9,18 @@ public class Main {
     public static void main(String[] args) {
         generateRegionNumbers();
         generateNumberPlates();
+
+        System.out.println("Введите автомобильный номер:");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        linearSearch(input);
+        binarySearch(input);
+        hashSetSearch(input);
+        treeSetSearch(input);
     }
 
-    public static void generateRegionNumbers () {
+    public static void generateRegionNumbers() {
         String regionNumber;
         for (int i = 1; i <= 199; i++) {
             if (i < 10) {
@@ -23,7 +31,8 @@ public class Main {
             regions.add(regionNumber);
         }
     }
-    public static void generateNumberPlates () {
+
+    public static void generateNumberPlates() {
         String numberPlate;
         for (int i = 0; i < letters.length; i++) {
             for (int j = 0; j < numbers.size(); j++) {
@@ -37,5 +46,57 @@ public class Main {
                 }
             }
         }
+    }
+
+    public static void linearSearch(String input) {
+        String searchResult;
+        long startTime = System.nanoTime();
+        if (numberPlates.contains(input)) {
+            searchResult = "найден";
+        } else {
+            searchResult = "не найден";
+        }
+        long endTime = System.nanoTime();
+        System.out.println("Поиск перебором: номер " + searchResult + ", поиск занял " + (endTime - startTime) + " нс.");
+    }
+
+    public static void binarySearch(String input) {
+        Collections.sort(numberPlates);
+        String searchResult;
+        long startTime = System.nanoTime();
+        int searchIndex = Collections.binarySearch(numberPlates, input);
+        long endTime = System.nanoTime();
+        if (searchIndex == -1) {
+            searchResult = "не найден";
+        } else {
+            searchResult = "найден";
+        }
+        System.out.println("Бинарный поиск: номер " + searchResult + ", поиск занял " + (endTime - startTime) + " нс.");
+    }
+
+    public static void hashSetSearch(String input) {
+        Set<String> numberPlatesInHS = new HashSet<String>(numberPlates);
+        String searchResult;
+        long startTime = System.nanoTime();
+        if (numberPlatesInHS.contains(input)) {
+            searchResult = "найден";
+        } else {
+            searchResult = "не найден";
+        }
+        long endTime = System.nanoTime();
+        System.out.println("Поиск в HashSet: номер " + searchResult + ", поиск занял " + (endTime - startTime) + " нс.");
+    }
+
+    public static void treeSetSearch(String input) {
+        Set<String> numberPlatesInTS = new TreeSet<String>(numberPlates);
+        String searchResult;
+        long startTime = System.nanoTime();
+        if (numberPlatesInTS.contains(input)) {
+            searchResult = "найден";
+        } else {
+            searchResult = "не найден";
+        }
+        long endTime = System.nanoTime();
+        System.out.println("Поиск в TreeSet: номер " + searchResult + ", поиск занял " + (endTime - startTime) + " нс.");
     }
 }
