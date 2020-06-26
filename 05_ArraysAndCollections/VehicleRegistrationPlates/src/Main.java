@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Main {
     public static final char[] letters = {'А', 'В', 'Е', 'К', 'М', 'Н', 'О', 'Р', 'С', 'Т', 'У', 'Х'};
-    public static final ArrayList<String> numbers = new ArrayList<String>(Arrays.asList("111", "222", "333", "444", "555", "666", "777", "888", "999"));
     public static final ArrayList<String> regions = new ArrayList<>();
     public static ArrayList<String> numberPlates = new ArrayList<>();
 
@@ -35,11 +34,11 @@ public class Main {
     public static void generateNumberPlates() {
         String numberPlate;
         for (int i = 0; i < letters.length; i++) {
-            for (int j = 0; j < numbers.size(); j++) {
+            for (int j = 111; j < 999; j += 111) {
                 for (int k = 0; k < letters.length; k++) {
                     for (int l = 0; l < letters.length; l++) {
                         for (int m = 0; m < regions.size(); m++) {
-                            numberPlate = letters[i] + numbers.get(j) + letters[k] + letters[l] + regions.get(m);
+                            numberPlate = letters[i] + j + letters[k] + letters[l] + regions.get(m);
                             numberPlates.add(numberPlate);
                         }
                     }
@@ -66,7 +65,7 @@ public class Main {
         long startTime = System.nanoTime();
         int searchIndex = Collections.binarySearch(numberPlates, input);
         long endTime = System.nanoTime();
-        if (searchIndex == -1) {
+        if (searchIndex < 0) {
             searchResult = "не найден";
         } else {
             searchResult = "найден";
