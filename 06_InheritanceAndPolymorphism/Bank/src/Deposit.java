@@ -15,4 +15,13 @@ public class Deposit extends BankAccount{
         super.putCash(cash);
         lastDepositDay = LocalDate.now();
     }
+
+    public boolean send(BankAccount receiver, double amount) {
+        if (lastDepositDay.plusDays(30).isBefore(LocalDate.now())) {
+            return super.send(receiver, amount);
+        } else {
+            System.out.println("Последнее пополнение было меньше месяца назад. Перевод денежных средств невозможен.");
+            return false;
+        }
+    }
  }

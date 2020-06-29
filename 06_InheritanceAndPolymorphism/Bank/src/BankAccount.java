@@ -19,4 +19,16 @@ public class BankAccount {
         System.out.println("Баланс на счёте " + balance + " рублей.");
         return balance;
     }
+
+    public boolean send(BankAccount receiver, double amount) {
+        if (balance - amount >= 0) {
+            receiver.balance = receiver.balance + amount;
+            balance = balance - amount;
+            System.out.println("Перевод успешно завершен.");
+            return true;
+        } else {
+            System.out.println("Невозможно выполнить перевод.");
+            return false;
+        }
+    }
 }
