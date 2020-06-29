@@ -2,8 +2,8 @@ import java.time.LocalDate;
 
 public class Deposit extends BankAccount{
     private LocalDate lastDepositDay;
-    
-    public void withdrawCash(int cash) {
+
+    public void withdrawCash(double cash) {
         if (lastDepositDay.plusDays(30).isBefore(LocalDate.now())) {
             super.withdrawCash(cash);
         } else {
@@ -11,7 +11,7 @@ public class Deposit extends BankAccount{
         }
     }
 
-    public void putCash(int cash) {
+    public void putCash(double cash) {
         super.putCash(cash);
         lastDepositDay = LocalDate.now();
     }
