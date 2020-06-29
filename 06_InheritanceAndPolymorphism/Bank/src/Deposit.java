@@ -7,7 +7,7 @@ public class Deposit extends BankAccount{
         if (lastDepositDay.plusDays(30).isBefore(LocalDate.now())) {
             super.withdrawCash(cash);
         } else {
-            System.out.println("Последнее пополнее было меньше месяца назад. Снятие наличных не возможно.");
+            System.out.println("Последнее пополнение было меньше месяца назад. Снятие наличных невозможно.");
         }
     }
 

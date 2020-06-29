@@ -4,6 +4,7 @@ public class Card extends BankAccount {
         double withdrawFee = 0.01 * cash;
         if (balance - cash - withdrawFee >= 0) {
             super.withdrawCash(cash);
+            balance = balance - withdrawFee;
         }
     }
 }
