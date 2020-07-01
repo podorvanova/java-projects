@@ -1,17 +1,30 @@
 public abstract class Client {
     protected double balance = 0;
 
-    public void depositCash(double cash) {
-        balance = balance + cash;
-        System.out.println("Денежные средства в размере " + cash + " рублей зачислены.");
+    public boolean depositCash(double cash) {
+        if (cash > 0) {
+            balance = balance + cash;
+            System.out.println("Денежные средства в размере " + cash + " рублей зачислены.");
+            return true;
+        } else {
+            System.out.println("Сумма зачисления должна быть больше 0 рублей.");
+            return false;
+        }
     }
 
-    public void withdrawCash(double cash) {
-        if (balance - cash >= 0) {
-            balance = balance - cash;
-            System.out.println("Денежные средства в размере " + cash + " рублей выведены.");
+    public boolean withdrawCash(double cash) {
+        if (cash > 0) {
+            if (balance - cash >= 0) {
+                balance = balance - cash;
+                System.out.println("Денежные средства в размере " + cash + " рублей выведены.");
+                return true;
+            } else {
+                System.out.println("Вы не можете вывести сумму больше вашего остатка.");
+                return false;
+            }
         } else {
-            System.out.println("Вы не можете вывести сумму больше вашего остатка.");
+            System.out.println("afeas");
+            return false;
         }
     }
 

@@ -1,6 +1,6 @@
 public class SoleTrader extends Client{
 
-    public void depositCash(double cash) {
+    public boolean depositCash(double cash) {
         double depositCommission;
         if (cash < 1000) {
             depositCommission = 0.01;
@@ -8,8 +8,11 @@ public class SoleTrader extends Client{
             depositCommission = 0.005;
         }
         double depositFee = cash * depositCommission;
-        super.depositCash(cash - depositFee);
-        System.out.println("Комиссия пополнения составляет " + depositFee + " рублей.");
+        boolean result = super.depositCash(cash - depositFee);
+        if (result) {
+            System.out.println("Комиссия пополнения составляет " + depositFee + " рублей.");
+        }
+        return result;
     }
 
     public void getInformation() {
