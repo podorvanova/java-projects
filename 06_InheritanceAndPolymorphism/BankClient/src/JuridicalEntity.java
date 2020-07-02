@@ -1,9 +1,9 @@
 public class JuridicalEntity extends Client {
 
-    private static final double WITHDRAWAL_COMMISSION = 0.01;
+    private static final int WITHDRAWAL_COMMISSION = 100;
 
-    public boolean withdrawCash(double cash) {
-        double withdrawFee = WITHDRAWAL_COMMISSION * cash;
+    public boolean withdrawCash(int cash) {
+        int withdrawFee = cash / WITHDRAWAL_COMMISSION;
         if (balance - cash - withdrawFee >= 0) {
             boolean result = super.withdrawCash(cash);
             if (result) {
