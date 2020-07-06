@@ -1,5 +1,9 @@
 public class Individual extends Client {
 
+    protected int getDepositCommission(int cash) {
+        return 0;
+    }
+
     protected int getWithdrawalCommission(int commission) {
         return 0;
     }

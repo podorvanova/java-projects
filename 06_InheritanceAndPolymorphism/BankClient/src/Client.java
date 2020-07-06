@@ -1,16 +1,20 @@
 public abstract class Client {
     protected int balance = 0;
 
-    public boolean depositCash(int cash) {
+    public void depositCash(int cash) {
         if (cash > 0) {
-            balance = balance + cash;
-            System.out.println("Денежные средства в размере " + (cash / 100) + " рублей " + (cash % 100) + " копеек зачислены.");
-            return true;
+            int depositCommission = getDepositCommission(cash);
+            balance = balance + cash - depositCommission;
+            System.out.println("Денежные средства в размере " + formatMoney(cash) + " зачислены.");
+            if (depositCommission != 0) {
+                System.out.println("Коммисия за пополнение составляет " + formatMoney(depositCommission) + ".");
+            }
         } else {
-            System.out.println("Сумма зачисления не должна быть отрицательной.");
-            return false;
+            System.out.println("Сумма пополнения должна быть положительным числом.");
         }
     }
+
+    protected abstract int getDepositCommission(int cash);
 
     public void withdrawCash(int cash) {
         if (cash > 0) {

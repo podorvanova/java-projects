@@ -2,6 +2,10 @@ public class JuridicalEntity extends Client {
 
     private static final int WITHDRAWAL_COMMISSION = 100;
 
+    protected int getDepositCommission(int cash) {
+        return 0;
+    }
+
     protected int getWithdrawalCommission(int cash) {
         return cash / WITHDRAWAL_COMMISSION;
     }
