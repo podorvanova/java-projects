@@ -35,5 +35,10 @@ public class Test {
             System.out.print("Зарплата сотрудника " + (i + 1) + " составляет " + companyEmployees.get(i).getMonthSalary() + " рублей. ");
             System.out.println("Сотрудник " + (i + 1) + " заработал для компании " + companyEmployees.get(i).moneyEarned() + " рублей. ");
         }
+
+        //Списки самых низких и востребованных зарплат в компании
+        coles.getLowestSalaryStaff(30);
+        coles.getTopSalaryStaff(15);
+
     }
 }
