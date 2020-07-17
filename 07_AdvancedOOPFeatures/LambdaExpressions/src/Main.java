@@ -14,7 +14,11 @@ public class Main
     {
         ArrayList<Employee> staff = loadStaffFromFile();
 
+        staff.sort(Comparator.comparing(Employee::getSalary).thenComparing(Employee::getName));
 
+        for (Employee employee : staff) {
+            System.out.println(employee);
+        }
     }
 
     private static ArrayList<Employee> loadStaffFromFile()
