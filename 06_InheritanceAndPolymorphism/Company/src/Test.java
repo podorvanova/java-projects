@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
@@ -29,7 +30,7 @@ public class Test {
             coles.fire(newEmployees.get(i));
         }
 
-        ArrayList<Employee> companyEmployees = coles.getEmployees();
+        List<Employee> companyEmployees = coles.getEmployees();
 
         for (int i = 0; i < companyEmployees.size(); i++) {
             System.out.print("Зарплата сотрудника " + (i + 1) + " составляет " + companyEmployees.get(i).getMonthSalary() + " рублей. ");
