@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -38,14 +39,12 @@ public class Company {
             System.out.println("count не должен быть отрицательным и превышать количество сотрудников в компании.");
             return null;
         } else {
-            employees.sort(Comparator.comparingInt(Employee::getMonthSalary));
-            List<Employee> sortedLowestSalary = new ArrayList<>();
+            Collections.sort(employees);
             System.out.println("Список минимальных зарплат в компании:");
             for (int i = 0; i < count; i++) {
-                sortedLowestSalary.add(employees.get(i));
                 System.out.println((i + 1) + ". " + employees.get(i).getMonthSalary() + " рублей.");
             }
-            return sortedLowestSalary;
+            return employees.subList(0, count);
         }
     }
 
