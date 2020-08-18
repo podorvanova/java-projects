@@ -52,7 +52,7 @@ public class Main
                     throw new IllegalArgumentException(commandError);
                 }
             }
-            catch (IllegalArgumentException ex) {
+            catch (Exception ex) {
                 System.err.println(ex.getMessage());
             }
         }

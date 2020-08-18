@@ -14,8 +14,7 @@ public class CustomerStorage
         storage = new HashMap<>();
     }
 
-    public void addCustomer(String data)
-    {
+    public void addCustomer(String data) throws EmailException {
         String[] components = data.split("\\s+");
 
         if (components.length != 4) {
@@ -31,12 +30,12 @@ public class CustomerStorage
 
         Matcher matcherTelephone = patternTelephone.matcher(components[3]);
         if (!matcherTelephone.find()) {
-            throw new IllegalArgumentException("Wrong telephone format. Correct format example: +79215637722");
+            throw new TelephoneException("Wrong telephone format. Correct format example: +79215637722");
         }
 
         Matcher matcherEmail = patternEmail.matcher(components[2]);
         if (!matcherEmail.find()) {
-            throw new IllegalArgumentException("Wrong email format. Correct format example: vasily.petrov@gmail.com");
+            throw new EmailException("Wrong email format. Correct format example: vasily.petrov@gmail.com");
         }
 
         storage.put(name, new Customer(name, components[3], components[2]));
