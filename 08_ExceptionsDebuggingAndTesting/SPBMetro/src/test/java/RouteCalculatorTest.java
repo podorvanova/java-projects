@@ -1,16 +1,20 @@
 import core.Line;
 import core.Station;
-import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class RouteCalculatorTest extends TestCase {
+import static org.junit.Assert.assertEquals;
+
+public class RouteCalculatorTest {
     RouteCalculator myRouteCalculator;
     StationIndex myStationIndex;
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         myStationIndex = new StationIndex();
         myRouteCalculator = new RouteCalculator(myStationIndex);
 
@@ -61,6 +65,7 @@ public class RouteCalculatorTest extends TestCase {
         }});
     }
 
+    @Test
     public void testCalculateDuration() {
         double actual = RouteCalculator.calculateDuration(new ArrayList<Station>() {{
                 add(myStationIndex.getStation("Петроградская"));
@@ -70,61 +75,55 @@ public class RouteCalculatorTest extends TestCase {
                 add(myStationIndex.getStation("Маяковская"));
             }});
         double expected = 11;
-        assertEquals(expected, actual);
+        assertEquals(expected, actual, 0.01);
     }
 
+    @Test
     public void testGetShortestRoute_OnTheLine() {
         List<Station> actual = myRouteCalculator.getShortestRoute(
                 myStationIndex.getStation("Петроградская"),
                 myStationIndex.getStation("Невский Проспект")
         );
-        List<Station> expected = new ArrayList<>();
-        expected.add(myStationIndex.getStation("Петроградская"));
-        expected.add(myStationIndex.getStation("Горьковская"));
-        expected.add(myStationIndex.getStation("Невский Проспект"));
+        List<Station> expected = getRouteByString("Петроградская->Горьковская->Невский Проспект");
         assertEquals(expected, actual);
     }
 
+    @Test
     public void testGetShortestRoute_OneConnection() {
         List<Station> actual = myRouteCalculator.getShortestRoute(
                 myStationIndex.getStation("Петроградская"),
                 myStationIndex.getStation("Площадь Александра Невского 1")
         );
-        List<Station> expected = new ArrayList<>();
-        expected.add(myStationIndex.getStation("Петроградская"));
-        expected.add(myStationIndex.getStation("Горьковская"));
-        expected.add(myStationIndex.getStation("Невский Проспект"));
-        expected.add(myStationIndex.getStation("Гостиный Двор"));
-        expected.add(myStationIndex.getStation("Маяковская"));
-        expected.add(myStationIndex.getStation("Площадь Александра Невского 1"));
+        List<Station> expected = getRouteByString("Петроградская->Горьковская->Невский Проспект->Гостиный Двор->Маяковская->Площадь Александра Невского 1");
         assertEquals(expected, actual);
     }
 
-     public void testGetShortestRoute_TwoConnections() {
+    @Test
+    public void testGetShortestRoute_TwoConnections() {
         List<Station> actual = myRouteCalculator.getShortestRoute(
                 myStationIndex.getStation("Петроградская"),
                 myStationIndex.getStation("Чернышевская")
         );
-        List<Station> expected = new ArrayList<>();
-        expected.add(myStationIndex.getStation("Петроградская"));
-        expected.add(myStationIndex.getStation("Горьковская"));
-        expected.add(myStationIndex.getStation("Невский Проспект"));
-        expected.add(myStationIndex.getStation("Гостиный Двор"));
-        expected.add(myStationIndex.getStation("Маяковская"));
-        expected.add(myStationIndex.getStation("Площадь Восстания"));
-        expected.add(myStationIndex.getStation("Чернышевская"));
+        List<Station> expected = getRouteByString("Петроградская->Горьковская->Невский Проспект->Гостиный Двор->Маяковская->Площадь Восстания->Чернышевская");
         assertEquals(expected, actual);
-     }
+    }
 
-     public void testGetShortestRoute_ReverseMoving() {
+    @Test
+    public void testGetShortestRoute_ReverseMoving() {
         List<Station> actual = myRouteCalculator.getShortestRoute(
                 myStationIndex.getStation("Площадь Александра Невского 1"),
                 myStationIndex.getStation("Гостиный Двор")
         );
-        List<Station> expected = new ArrayList<>();
-        expected.add(myStationIndex.getStation("Площадь Александра Невского 1"));
-        expected.add(myStationIndex.getStation("Маяковская"));
-        expected.add(myStationIndex.getStation("Гостиный Двор"));
+        List<Station> expected = getRouteByString("Площадь Александра Невского 1->Маяковская->Гостиный Двор");
         assertEquals(expected, actual);
-     }
+    }
+
+    private List<Station> getRouteByString(String stringRoute) {
+        List<String> splitString = Arrays.asList(stringRoute.split("->"));
+        List<Station> route = new ArrayList<>();
+        for (int i = 0; i < splitString.size(); i++) {
+            route.add(myStationIndex.getStation(splitString.get(i)));
+        }
+        return route;
+    }
 }
