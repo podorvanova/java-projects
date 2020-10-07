@@ -118,6 +118,13 @@ public class RouteCalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testGetShortestRoute_NullArgument() {
+        List<Station> actual = myRouteCalculator.getShortestRoute(null, null);
+        List<Station> expected = new ArrayList<>();
+        assertEquals(expected, actual);
+    }
+
     private List<Station> getRouteByString(String stringRoute) {
         List<String> splitString = Arrays.asList(stringRoute.split("->"));
         List<Station> route = new ArrayList<>();

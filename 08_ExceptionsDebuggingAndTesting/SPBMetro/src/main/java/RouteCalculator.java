@@ -19,6 +19,10 @@ public class RouteCalculator
 
     public List<Station> getShortestRoute(Station from, Station to)
     {
+        if (from == null || to == null) {
+            return new ArrayList<>();
+        }
+
         List<Station> route = getRouteOnTheLine(from, to);
         if(route != null) {
             return route;
