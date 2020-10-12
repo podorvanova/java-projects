@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,16 +18,23 @@ public class Main {
             }
 
             Path toCopyFolderPath = Paths.get(toCopyFolder);
+            Path folderWithCopyPath = Paths.get(folderWithCopy);
 
-            Files.walk(toCopyFolderPath).forEach(f -> {
-                Path endDestinationPath = Paths.get(folderWithCopy, f.toString().substring(toCopyFolder.length()));
-                try {
-                    if (!f.toString().equals(toCopyFolder))
-                        Files.copy(f, endDestinationPath, StandardCopyOption.REPLACE_EXISTING);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+            Files.walkFileTree(toCopyFolderPath, new SimpleFileVisitor<Path>() {
+
+                @Override
+                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                    Files.createDirectories(folderWithCopyPath.resolve(toCopyFolderPath.relativize(dir)));
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.copy(file, folderWithCopyPath.resolve(toCopyFolderPath.relativize(file)));
+                    return FileVisitResult.CONTINUE;
                 }
             });
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
