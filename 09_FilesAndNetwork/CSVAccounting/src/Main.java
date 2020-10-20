@@ -9,6 +9,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+    private static final int COMPANY_NAME = 5;
+    private static final int INCOME = 6;
+    private static final int EXPENSES = 7;
+
     public static void main(String[] args) {
         try {
             if (!new File("../files/movementList.csv").exists()) {
@@ -29,18 +33,18 @@ public class Main {
                             }
 
                             // Record formatting (replacing comma with dot, removing extra quotes)
-                            if (components[6].contains(",") || components[6].contains("\"")) {
-                                components[6] = components[6].replace(",", ".");
-                                components[6] = components[6].replaceAll("\"", "");
+                            if (components[INCOME].contains(",") || components[INCOME].contains("\"")) {
+                                components[INCOME] = components[INCOME].replace(",", ".");
+                                components[INCOME] = components[INCOME].replaceAll("\"", "");
                             }
-                            if (components[7].contains(",") || components[6].contains("\"")) {
-                                components[7] = components[7].replace(",", ".");
-                                components[7] = components[7].replaceAll("\"", "");
+                            if (components[EXPENSES].contains(",") || components[EXPENSES].contains("\"")) {
+                                components[EXPENSES] = components[EXPENSES].replace(",", ".");
+                                components[EXPENSES] = components[EXPENSES].replaceAll("\"", "");
                             }
 
                             // Company name parsing
                             String companyName;
-                            Matcher matcherCompanyName = companyNamePattern.matcher(components[5].substring(29));
+                            Matcher matcherCompanyName = companyNamePattern.matcher(components[COMPANY_NAME].substring(29));
                             if (matcherCompanyName.find()) {
                                 companyName = matcherCompanyName.group(1);
                             } else {
@@ -48,11 +52,11 @@ public class Main {
                             }
 
                             if (!companyTotalExpenses.containsKey(companyName)) {
-                                companyTotalExpenses.put(companyName, Double.parseDouble(components[7]));
+                                companyTotalExpenses.put(companyName, Double.parseDouble(components[EXPENSES]));
                             } else {
                                 companyTotalExpenses.replace(
                                         companyName,
-                                        companyTotalExpenses.get(companyName) + Double.parseDouble(components[7])
+                                        companyTotalExpenses.get(companyName) + Double.parseDouble(components[EXPENSES])
                                 );
                             }
                         })
@@ -61,8 +65,8 @@ public class Main {
                                 new IncomeAndExpenses(0.0, 0.0),
                                 (incomeAndExpenses, components) ->
                                         new IncomeAndExpenses(
-                                                incomeAndExpenses.income + Double.parseDouble(components[6]),
-                                                incomeAndExpenses.expenses + Double.parseDouble(components[7])
+                                                incomeAndExpenses.income + Double.parseDouble(components[INCOME]),
+                                                incomeAndExpenses.expenses + Double.parseDouble(components[EXPENSES])
                                         ),
                                 IncomeAndExpenses::sum
                         );
